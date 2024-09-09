@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/boggle.css">
+    <title>Boggle Game</title>
+</head>
+
+<body>
+    <h1>Boggle!</h1>
+
+    <!-- Section for displaying game stats such as timer, number of plays, high score, and current score -->
+    <section class="game-stats">
+        <div id="timer">Time left: </div>
+        <div id="plays">Number of Plays: {{plays}}</div>
+        <div id="highscore">High Score: {{high_score}}</div>
+        <div id="score"></div>
+    </section>
+
+    <!-- Div to display response messages (initially hidden) -->
+    <div class="hidden" id="response"><span id="res-msg"></span></div>
+
+    <!-- Button to restart game (initially hidden) -->
+    <div id="restart" class="hidden">
+        <button>Restart</button>
+    </div>
+
+    <!-- Table displaying the boggle board (generated dynamically from Flask template) -->
+    <table>
+        <tbody>
+            {% for row in board %}
+            <tr>
+                {% for cell in row %}
+                <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Form for submitting  a guess  -->
+    <form action="/submit" method="post">
+        <label for="guess">
+            <input type="text" name="guess" id="guess">
+        </label>
+        <button type="submit" id="submit">Enter</button>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="static/boggle.js"></script>
+</body>
+
+</html>
